@@ -4,8 +4,6 @@ require 'capybara/rspec'
 require 'allure-rspec'
 require 'logger'
 
-
-
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
@@ -20,7 +18,6 @@ RSpec.configure do |config|
   config.include AllureRSpec::Adaptor
   config.include Capybara::DSL
 
-
   config.after :each do |e|
     temp_file = '/log/reports/screenshots/temp_file.png'
 
@@ -30,8 +27,24 @@ RSpec.configure do |config|
   end
 end
 
+Capybara.javascript_driver = :selenium
+Capybara.run_server = false
+
+args = ['--no-default-browser-check']
+caps = Selenium::WebDriver::Remote::Capabilities.chrome(
+  'chromeOptions' => { 'args' => args }
+)
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :remote,
+    url: 'http://selenium_server:4444/wd/hub',
+    desired_capabilities: caps
+  )
+end
+
 Capybara.configure do |config|
-  config.default_driver = :selenium_chrome
+  config.default_driver = :selenium
   config.app_host = 'https://www.dotz.com.br'
 end
 
