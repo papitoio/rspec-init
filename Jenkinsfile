@@ -20,7 +20,7 @@ pipeline {
                     try {
                         sh "rspec -fd"
                     } finally {
-                        // cucumber fileIncludePattern: '**/*.json', jsonReportDirectory: 'log', sortingMethod: 'ALPHABETICAL'
+                        allure includeProperties: false, jdk: '', results: [[path: 'log/reports']]
                     }
                 }                
             }
