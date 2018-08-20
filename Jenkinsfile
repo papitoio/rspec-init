@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh "bundle rspec -fd"
+                        sh "rspec -fd"
                     } finally {
                         // cucumber fileIncludePattern: '**/*.json', jsonReportDirectory: 'log', sortingMethod: 'ALPHABETICAL'
                     }
