@@ -12,7 +12,7 @@ describe 'Login', :smoke do
     click_link 'São Paulo'
   end
 
-  it('home SP', :smoke) do
+  it('home Sorocaba', :smoke) do
     click_link 'Sorocaba'
   end
 end
