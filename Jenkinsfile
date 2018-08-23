@@ -1,8 +1,14 @@
 pipeline {
-    agent {
-        docker {
-            image 'ruby'
-            args '--link selenium_server'
+    //agent {
+    //    docker {
+    //        image 'ruby'
+    //        args '--link selenium_server'
+    //    }
+    //}
+    agent { 
+        dockerfile { 
+            args '--link selenium_server'                  
+            reuseNode true
         }
     }
     environment {
