@@ -1,7 +1,7 @@
 
 describe 'Login', :smoke do
   before(:each) do
-    visit 'https://www.dotz.com.br'
+    visit '/'
   end
 
   it('pre home', :smoke) do |e|
