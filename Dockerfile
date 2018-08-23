@@ -13,6 +13,9 @@ ENV RUBY_DOWNLOAD_SHA256 1d0034071d675193ca769f64c91827e5f54cb3a7962316a41d5217c
 ENV RUBYGEMS_VERSION 2.7.7
 ENV BUNDLER_VERSION 1.16.4
 
+#Allure
+RUN apt-add-repository ppa:qameta/allure
+
 # some of ruby's build scripts are written in ruby
 #   we purge system ruby later to make sure our final image uses what we just built
 RUN set -ex \
@@ -22,7 +25,7 @@ RUN set -ex \
 		dpkg-dev \
 		libgdbm-dev \
 		ruby \
-		curl \
+		allure \
 	' \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends $buildDeps \
@@ -74,8 +77,5 @@ ENV PATH $GEM_HOME/bin:$BUNDLE_PATH/gems/bin:$PATH
 # adjust permissions of a few directories for running "gem install" as an arbitrary user
 RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME"
 # (BUNDLE_PATH = GEM_HOME, no need to mkdir/chown both)
-
-RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-RUN apt-get install -y nodejs
 
 CMD [ "irb" ]
