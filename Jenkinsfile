@@ -20,6 +20,7 @@ pipeline {
                     try {
                         sh "rspec -fd"
                     } finally {
+                        input message: 'Testes finalizados deseja subir em produção?  (Clique em "Sim" para continuar)'
                         node('master') {
                             stage('Run!') {
                                 sh "/usr/lib/node_modules/allure-commandline/bin/allure generate ./log/reports/ ./allure-report/ --clean"
