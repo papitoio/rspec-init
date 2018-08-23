@@ -13,6 +13,7 @@ pipeline {
             steps {
                 sh "bundle install"
                 sh "wget https://bintray.com/qameta/generic/download_file?file_path=io%2Fqameta%2Fallure%2Fallure%2F2.7.0%2Fallure-2.7.0.zip"
+                sh "if [ -d allure-2.7.0 ]; then rmdir allure-2.7.0; fi"
                 sh "unzip *.zip"
                 sh "rm *.zip"
             }
