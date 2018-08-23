@@ -1,2 +1,3 @@
 log/reports
-tools/
+tools/*.zip
+tools/allure-*
