@@ -9,9 +9,12 @@ pipeline {
         CI = true
     }
     stages {
-        stage('Build') {
+        stage('Preparation') {
             steps {
                 sh "bundle install"
+                sh "wget https://bintray.com/qameta/generic/download_file?file_path=io%2Fqameta%2Fallure%2Fallure%2F2.7.0%2Fallure-2.7.0.zip"
+                sh "unzip *.zip"
+                sh "rm *.zip"
             }
         }
         stage('Run Tests') {
@@ -20,7 +23,8 @@ pipeline {
                     try {
                         sh "rspec -fd"
                     } finally {
-                        allure includeProperties: false, jdk: '', results: [[path: 'log/reports']]
+                        sh "./allure-2.7.0/bin/allure generate ./log/reports/ ./allure-report/ --clean"
+                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'allure-report', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
                     }
                 }                
             }
