@@ -22,7 +22,7 @@ pipeline {
                     } finally {
                         node('master') {
                             stage('Run!') {
-                                sh "allure generate ./log/reports/ ./allure-report/ --clean"
+                                sh "/usr/lib/node_modules/allure-commandline/bin/allure generate ./log/reports/ ./allure-report/ --clean"
                             }
                         }
                         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'allure-report', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
