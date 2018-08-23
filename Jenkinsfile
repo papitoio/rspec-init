@@ -12,7 +12,7 @@ pipeline {
         stage('Preparation') {
             steps {
                 sh "bundle install"
-                sh "./allure.sh"
+                sh "./tools/allure.sh"
             }
         }
         stage('Run Tests') {
