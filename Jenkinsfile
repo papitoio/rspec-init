@@ -22,8 +22,8 @@ pipeline {
                         sh "rspec -fd"
                     } finally {
                         // input message: 'Testes finalizados deseja subir em produção?  (Clique em "Sim" para continuar)'
-                        sh "./tools/allure-2.7.0/bin/allure generate ./log/reports/ ./allure-report/ --clean"
-                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'allure-report', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
+                        sh "./tools/allure-2.7.0/bin/allure generate ./log/reports/ ./log/publish-allure/ --clean"
+                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'log/publish-allure', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
                     }
                 }                
             }
