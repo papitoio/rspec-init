@@ -18,6 +18,7 @@ pipeline {
         stage('Preparation') {
             steps {
                 sh "bundle install"
+                sh "npm install allure-commandline -g"
             }
         }
         stage('Run Tests') {
