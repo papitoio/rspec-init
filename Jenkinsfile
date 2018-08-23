@@ -11,6 +11,7 @@ pipeline {
     stages {
         stage('Preparation') {
             steps {
+                sh "apk add unzip"
                 sh "bundle install"
                 sh "wget https://bintray.com/qameta/generic/download_file?file_path=io%2Fqameta%2Fallure%2Fallure%2F2.7.0%2Fallure-2.7.0.zip"
                 sh "if [ -d allure-2.7.0 ]; then rm -rf allure-2.7.0; fi"
